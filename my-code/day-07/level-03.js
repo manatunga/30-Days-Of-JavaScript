@@ -49,11 +49,7 @@ console.log(rgbColorGenerator());
 // Function that returns average of an array
 const average = (arr) => {
     let sum = 0;
-
-    for (let value of arr) {
-        sum += value;
-    }
-
+    arr.forEach((value) => sum += value);
     return sum/arr.length;
 }
-console.log(average([1, 9, 5, 6, 3, 7]));
+console.log(average([1, 2, 3, 4, 5]));
