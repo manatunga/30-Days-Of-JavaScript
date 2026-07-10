@@ -1,4 +1,4 @@
-export const countries = [
+const countries = [
   'Afghanistan',
   'Albania',
   'Algeria',
@@ -192,64 +192,72 @@ export const countries = [
   'Yemen',
   'Zambia',
   'Zimbabwe'
-]
+];
 
-const webTechs = [
-  'HTML',
-  'CSS',
-  'JavaScript',
-  'React',
-  'Redux',
-  'Node',
-  'MongoDB'
-]
+const names = ['Asabeneh', 'Mathias', 'Elias', 'Brook'];
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const products = [
+  { product: 'banana', price: 3 },
+  { product: 'mango', price: 6 },
+  { product: 'potato', price: ' ' },
+  { product: 'avocado', price: 8 },
+  { product: 'coffee', price: 10 },
+  { product: 'tea', price: '' },
+];
 
-const mernStack = ['MongoDB', 'Express', 'React', 'Node']
+
+// Find total price of products
+const total = products
+    .filter(({price}) => typeof price == 'number')
+    .reduce((sum, product) => sum + product.price, 0);
+
+console.log(total);
 
 
-webTechs.sort()
-mernStack.sort()
-
-const landCountries = []
-for (country of countries) {
-    if (country.toLowerCase().includes('land')) {
-        landCountries.push(country)
-    }
+// Find countries with common patterns
+const categorizeCountries = (pattern) => {
+    return countries.filter((country) => country.toLowerCase().includes(pattern));
 }
-console.log(landCountries)
+console.log(categorizeCountries('land'));
 
-let longestCountry = ''
-let longestNumber = 0
-for (country of countries) {
-    if (longestNumber < country.length) {
-        longestCountry  = country;
-        longestNumber = country.length;
-    }
+
+/* Create array of objects showing 
+no. of times a country starts with each letter */
+const countriesStartingWith = (countryList) => {
+    const countryLetterPairs = countryList.reduce((acc, country) => {
+        const letter = country.toUpperCase()[0]
+        acc[letter] = (acc[letter] || 0) + 1;
+        return acc;
+    }, {});
+    
+    return Object.entries(countryLetterPairs)
+    .map(([letter, count]) => ({ letter, count }));
 }
-console.log(`Country w/ highest no. of characters: ${longestCountry}`);
+console.log(countriesStartingWith(countries));
 
-const fourLetterCountries = []
-for (country of countries) {
-    if (country.length === 4) {
-        fourLetterCountries.push(country)
-    }
+
+// Function to extract first ten countries
+const getFirstTenCountries = (countryList) => {
+    return countryList.sort().slice(0, 10);
 }
-console.log(fourLetterCountries);
+console.log(getFirstTenCountries(countries));
 
-const twoPlusLetterCountries = []
-for (country of countries) {
-    if (country.length >= 2) {
-        twoPlusLetterCountries.push(country)
-    }
+
+// Function to extract last ten countries
+const getLastTenCountries = (countryList) => {
+    return countryList.sort().slice(countryList.length - 10, countries.length);
 }
-console.log(twoPlusLetterCountries);
+console.log(getLastTenCountries(countries));
 
 
-countries.reverse()
-let countryATM = ''
-const capitalizedCountries = []
-for (country of countries) {
-    countryATM = country.split(' ').map(country => country.charAt(0).toUpperCase() + country.slice(1)).join(' ');
-    capitalizedCountries.push(countryATM);
+// Find which letter is the most frequent first letter across countries
+const mostFrequentFirstLetter = (countryList) => {
+    const mostFrequent = countriesStartingWith(countryList)
+    .reduce((acc, arr) => { 
+        return acc.count < arr.count ? arr: acc;
+    }, {letter: '', count:0});
+
+    return `Most frequent first letter is ${mostFrequent.letter}!`
 }
-console.log(capitalizedCountries);
+
+console.log(mostFrequentFirstLetter(countries));
