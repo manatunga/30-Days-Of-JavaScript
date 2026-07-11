@@ -211,7 +211,7 @@ webTechs.sort()
 mernStack.sort()
 
 const landCountries = []
-for (country of countries) {
+for (let country of countries) {
     if (country.toLowerCase().includes('land')) {
         landCountries.push(country)
     }
@@ -220,7 +220,7 @@ console.log(landCountries)
 
 let longestCountry = ''
 let longestNumber = 0
-for (country of countries) {
+for (let country of countries) {
     if (longestNumber < country.length) {
         longestCountry  = country;
         longestNumber = country.length;
@@ -229,7 +229,7 @@ for (country of countries) {
 console.log(`Country w/ highest no. of characters: ${longestCountry}`);
 
 const fourLetterCountries = []
-for (country of countries) {
+for (let country of countries) {
     if (country.length === 4) {
         fourLetterCountries.push(country)
     }
@@ -237,7 +237,7 @@ for (country of countries) {
 console.log(fourLetterCountries);
 
 const twoPlusLetterCountries = []
-for (country of countries) {
+for (let country of countries) {
     if (country.length >= 2) {
         twoPlusLetterCountries.push(country)
     }
@@ -248,8 +248,10 @@ console.log(twoPlusLetterCountries);
 countries.reverse()
 let countryATM = ''
 const capitalizedCountries = []
-for (country of countries) {
+for (let country of countries) {
     countryATM = country.split(' ').map(country => country.charAt(0).toUpperCase() + country.slice(1)).join(' ');
     capitalizedCountries.push(countryATM);
 }
 console.log(capitalizedCountries);
+
+export default countries;
